@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
-import { fetchSingleTodoAsync, selectTodo, editTodoAsync } from "./todoSlice";
+import {
+  fetchSingleTodoAsync,
+  selectTodo,
+  editTodoAsync,
+  deleteTodoAsync,
+} from "./todoSlice";
 
 const EditTodo = () => {
   const [taskName, setTaskName] = useState("");
@@ -19,6 +24,10 @@ const EditTodo = () => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     dispatch(editTodoAsync({ id, taskName, assignee }));
+  };
+
+  const handleDelete = () => {
+    dispatch(deleteTodoAsync(id));
   };
 
   return (
@@ -44,9 +53,11 @@ const EditTodo = () => {
           onChange={(e) => setAssignee(e.target.value)}
         />
 
-        <button type="submit">Submit</button>
+        <button type="submit">Edit</button>
+
         <Link to="/">Cancel</Link>
       </form>
+      <button onClick={handleDelete}>Delete</button>
     </>
   );
 };

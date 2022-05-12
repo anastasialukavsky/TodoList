@@ -38,24 +38,6 @@ export const deleteTodoAsync = createAsyncThunk(
   }
 );
 
-export const editTodoAsync = createAsyncThunk(
-  "todos/editTodo",
-  async ({ id, assignee, taskName }) => {
-    const response = await fetch(`http://localhost:8080/api/todos/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        assignee,
-        taskName,
-      }),
-    });
-    const data = await response.json();
-    return data;
-  }
-);
-
 export const todosSlice = createSlice({
   name: "todos",
   initialState: [],
@@ -74,15 +56,6 @@ export const todosSlice = createSlice({
     });
     builder.addCase(deleteTodoAsync.fulfilled, (state, action) => {
       const newState = state.filter((todo) => todo.id !== action.payload.id);
-      return newState;
-    });
-    builder.addCase(editTodoAsync.fulfilled, (state, action) => {
-      const newState = state.map((todo) => {
-        if ((todo.id = action.payload.id)) {
-          return action.payload;
-        }
-        return todo;
-      });
       return newState;
     });
   },

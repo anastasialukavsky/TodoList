@@ -27,15 +27,35 @@ export const editTodoAsync = createAsyncThunk(
   }
 );
 
+export const deleteTodoAsync = createAsyncThunk(
+  "todos/deleteTodo",
+  async (id) => {
+    const response = await fetch(`http://localhost:8080/api/todos/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    return data;
+  }
+);
+
 export const todoSlice = createSlice({
   name: "todo",
-  initialState: {},
+  initialState: {
+    singleTask: {},
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchSingleTodoAsync.fulfilled, (state, action) => {
       return action.payload;
     });
     builder.addCase(editTodoAsync.fulfilled, (state, action) => {
+      console.log("payload", action.payload);
       return action.payload;
+    });
+    builder.addCase(deleteTodoAsync.fulfilled, (state, action) => {
+      return {};
     });
   },
 });
