@@ -52,12 +52,17 @@ const EditTodo = () => {
           value={assignee}
           onChange={(e) => setAssignee(e.target.value)}
         />
+        <div className="button-box">
+          <button type="submit">Edit</button>
 
-        <button type="submit">Edit</button>
-
-        <Link to="/">Cancel</Link>
+          <Link to="/">
+            <button>Cancel</button>
+          </Link>
+        </div>
       </form>
-      <button onClick={handleDelete}>Delete</button>
+      <div className="delete-button">
+        <button onClick={handleDelete}>Delete</button>
+      </div>
     </>
   );
 };
