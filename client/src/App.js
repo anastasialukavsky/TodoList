@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { Routes, Route, Link } from "react-router-dom";
 
 import Todos from "./features/todos";
-import EditTodo from "./features/editTodo";
 import CreateTodo from "./features/createTodo";
 
 import "./App.css";
@@ -20,7 +19,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Todos />} />
         <Route path="/createTodo" element={<CreateTodo />} />
-        <Route path="/todos/:id" element={<EditTodo />} />
+        {
+          // add your edit component route here
+        }
       </Routes>
     </div>
   );
