@@ -1,7 +1,54 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, Link } from "react-router-dom";
+import { fetchSingleTodoAsync, selectTodo, editTodoAsync } from "./todoSlice";
 
 const EditTodo = () => {
-  return <div>Edit Todo</div>;
+  const [taskName, setTaskName] = useState("");
+  const [assignee, setAssignee] = useState("");
+
+  const dispatch = useDispatch();
+  const todo = useSelector(selectTodo);
+  console.log("single todo:", todo);
+  const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(fetchSingleTodoAsync(id));
+  }, []);
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    dispatch(editTodoAsync({ id, taskName, assignee }));
+  };
+
+  return (
+    <>
+      <li key={todo.id}>
+        <h2>
+          <Link to={`/todos/${todo.id}`}>Task: {todo.taskName}</Link>
+        </h2>
+        <p>assigned by {todo.assignee}</p>
+      </li>
+      <form id="todo-form" onSubmit={handleSubmit}>
+        <label htmlFor="taskName">Task Name:</label>
+        <input
+          name="taskName"
+          value={taskName}
+          onChange={(e) => setTaskName(e.target.value)}
+        />
+
+        <label htmlFor="assignee">Assign To:</label>
+        <input
+          name="assignee"
+          value={assignee}
+          onChange={(e) => setAssignee(e.target.value)}
+        />
+
+        <button type="submit">Submit</button>
+        <Link to="/">Cancel</Link>
+      </form>
+    </>
+  );
 };
 
 export default EditTodo;
