@@ -11,7 +11,7 @@ const Todos = () => {
 
   useEffect(() => {
     dispatch(fetchTodosAsync());
-  }, []);
+  }, [dispatch]);
 
   return (
     <ul>
