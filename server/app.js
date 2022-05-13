@@ -13,12 +13,6 @@ app.use(cors());
 
 app.use("/api", require("./api"));
 
-app.use((req, res, next) => {
-  const error = Error("page not found");
-  error.status = 404;
-  next(error);
-});
-
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(err.status || 500).send(err.message || "Internal server error.");
