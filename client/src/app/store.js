@@ -4,6 +4,6 @@ import todosReducer from "../features/todos/todosSlice";
 export const store = configureStore({
   reducer: {
     todos: todosReducer,
-    // add your single todo reducer here
+    // * add your single todo reducer here
   },
 });
