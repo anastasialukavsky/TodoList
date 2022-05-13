@@ -24,20 +24,6 @@ export const addTodoAsync = createAsyncThunk(
   }
 );
 
-export const deleteTodoAsync = createAsyncThunk(
-  "todos/deleteTodo",
-  async (id) => {
-    const response = await fetch(`http://localhost:8080/api/todos/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await response.json();
-    return data;
-  }
-);
-
 export const todosSlice = createSlice({
   name: "todos",
   initialState: [],
@@ -53,10 +39,6 @@ export const todosSlice = createSlice({
     });
     builder.addCase(addTodoAsync.fulfilled, (state, action) => {
       state.push(action.payload);
-    });
-    builder.addCase(deleteTodoAsync.fulfilled, (state, action) => {
-      const newState = state.filter((todo) => todo.id !== action.payload.id);
-      return newState;
     });
   },
 });
