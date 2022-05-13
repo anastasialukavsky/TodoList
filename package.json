@@ -4,6 +4,7 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
+    "postinstall": "npm install --prefix client",
     "start:dev": "(npm run start --prefix client) & nodemon server",
     "start-server": "nodemon server"
   },
