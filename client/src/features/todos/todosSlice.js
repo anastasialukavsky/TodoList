@@ -39,7 +39,8 @@ export const todosSlice = createSlice({
   },
 });
 
-// * This is a function we will pass to useSelector in our component, to read values from our specific slice of redux state
+// * This is a function we will pass to useSelector in our component,
+// * to read values from our specific slice of redux state
 export const selectTodos = (state) => state.todos;
 
 // * We need to export the reducer from our slice, and add it to our configureStore function in app/store.js
