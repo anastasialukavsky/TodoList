@@ -1,15 +1,13 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
-import { Provider } from "react-redux";
-import { store } from "./app/store";
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
+import { BrowserRouter as Router } from 'react-router-dom';
+import App from './App';
+import './App.css';
 
-import { BrowserRouter as Router } from "react-router-dom";
-
-import App from "./App";
-import "./index.css";
-
-const container = document.getElementById("root");
-const root = createRoot(container);
+const appContainer = document.querySelector('#root');
+const root = createRoot(appContainer);
 
 root.render(
   <React.StrictMode>

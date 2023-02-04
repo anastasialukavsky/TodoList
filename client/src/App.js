@@ -1,30 +1,17 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Routes, Route, Link } from "react-router-dom";
+import React from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import AllTodos from './components/AllTodos';
 
-import Todos from "./features/todos";
-import CreateTodo from "./features/createTodo";
-
-import "./App.css";
-
-function App() {
-  const todos = useSelector((state) => state.todos);
-
+export default function App(props) {
   return (
-    <div className="App">
+    <main className="app" id="main">
       <nav>
-        <Link to="/">All Todos ({todos.length})</Link>
-        <Link to="/createTodo">Create a Todo</Link>
+        <Link to="/">All Todos</Link>
+        <p>Create Todo</p>
       </nav>
       <Routes>
-        <Route path="/" element={<Todos />} />
-        <Route path="/createTodo" element={<CreateTodo />} />
-        {
-          // add your edit component route here
-        }
+        <Route path="/" element={<AllTodos />} />
       </Routes>
-    </div>
+    </main>
   );
 }
-
-export default App;
