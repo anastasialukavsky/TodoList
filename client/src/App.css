@@ -119,7 +119,16 @@ button:disabled {
   background-color: #ccc;
 }
 
+.disabled {
+  background-color: #ccc;
+}
+
+.disabled:hover {
+  background-color: #ccc;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
+  width: 300px;
 }

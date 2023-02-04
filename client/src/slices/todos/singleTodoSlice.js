@@ -1,9 +1,10 @@
-import axios from "axios";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from 'axios';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const fetchSingleTodo = createAsyncThunk(
-  "singleTodo/fetchSingleTodo",
+  'singleTodo/fetchSingleTodo',
   async (id) => {
+    if (id === undefined) return {};
     try {
       const { data } = await axios.get(`http://localhost:8080/api/todos/${id}`);
       console.log(data);
@@ -14,8 +15,20 @@ export const fetchSingleTodo = createAsyncThunk(
   }
 );
 
+export const createSingleTodo = createAsyncThunk(
+  'singleTodo/createSingleTodo',
+  async ({ taskName, assignee }) => {
+    try {
+      const { data } = await axios.post('/api/todos', { taskName, assignee });
+      return data;
+    } catch (err) {
+      console.error('Trouble creating new Todo:', err.message);
+    }
+  }
+);
+
 export const editSingleTodo = createAsyncThunk(
-  "singleTodo/editSingleTodo",
+  'singleTodo/editSingleTodo',
   async ({ taskName, todoId, assignee }) => {
     try {
       const { data } = await axios.put(`/api/todos/${todoId}`, {
@@ -29,8 +42,19 @@ export const editSingleTodo = createAsyncThunk(
   }
 );
 
+export const deleteSingleTodo = createAsyncThunk(
+  'singleTodo/deleteSingleTodo',
+  async (todoId) => {
+    try {
+      await axios.delete(`/api/todos/${todoId}`);
+    } catch (err) {
+      console.error('Trouble deleting single todo', err.message);
+    }
+  }
+);
+
 const singleTodoSlice = createSlice({
-  name: "singleTodo",
+  name: 'singleTodo',
   initialState: {},
   extraReducers: (builder) => {
     builder
@@ -39,6 +63,12 @@ const singleTodoSlice = createSlice({
       })
       .addCase(editSingleTodo.fulfilled, (state, { payload }) => {
         return payload;
+      })
+      .addCase(deleteSingleTodo.fulfilled, (state, { payload }) => {
+        return {};
+      })
+      .addCase(createSingleTodo.fulfilled, (state, { payload }) => {
+        return { payload };
       });
   },
 });
