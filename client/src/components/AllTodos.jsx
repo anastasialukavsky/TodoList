@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllTodos, selectAllTodos } from '../slices/todos/todosSlice';
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchAllTodos, selectAllTodos } from "../slices/todos/todosSlice";
 
 export default function AllTodos(props) {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ export default function AllTodos(props) {
         return (
           <React.Fragment key={todo.id}>
             <li>
-              <Link to={`/${todo.id}`}>{todo.taskName}</Link>
+              <Link to={`/todos/${todo.id}`}>{todo.taskName}</Link>
               <p>Assigned by: {todo.assignee}</p>
             </li>
           </React.Fragment>

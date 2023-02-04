@@ -1,8 +1,8 @@
-const router = require('express').Router();
-const { Todo } = require('../db').models;
+const router = require("express").Router();
+const { Todo } = require("../db").models;
 
 // GET /api/todos
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     res.send(await Todo.findAll());
   } catch (error) {
@@ -11,7 +11,7 @@ router.get('/', async (req, res, next) => {
 });
 
 // GET /api/todos/:id
-router.get('/:id', async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
     res.send(await Todo.findByPk(req.params.id));
   } catch (error) {
@@ -20,7 +20,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 // POST /api/todos
-router.post('/', async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     res.status(201).send(await Todo.create(req.body));
   } catch (error) {
@@ -29,7 +29,7 @@ router.post('/', async (req, res, next) => {
 });
 
 // PUT /api/todos/:id
-router.put('/:id', async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const todo = await Todo.findByPk(req.params.id);
     res.send(await todo.update(req.body));
@@ -39,7 +39,7 @@ router.put('/:id', async (req, res, next) => {
 });
 
 // DELETE /api/todos/:id
-router.delete('/:id', async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     const todo = await Todo.findByPk(req.params.id);
     await todo.destroy();
